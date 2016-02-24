@@ -1,5 +1,5 @@
 #Original work 
-see README-From-2009 
+see README-From-2009, and INSTALL for original notes of the authors about installation
 
 # Compile & install tools
 - make config
