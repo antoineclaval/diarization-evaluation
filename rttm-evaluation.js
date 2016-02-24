@@ -17,7 +17,7 @@ module.exports = {
             };
 
             for (var i=0; i<items.length; i++) {
-                if(items && items[i] && ! items[i].startsWith('.')){
+                if(items[i] && ! items[i].startsWith('.')){
                     fs.writeFile('generatedRttmLists'+'/'+items[i]+'list.txt', buildRTTMList(i), (err)=> {
                         if(err) {
                             return console.log(err);
@@ -31,17 +31,30 @@ module.exports = {
     //Exemple cat of the rttmSmooth utility : 
     //cat Computers.mp4-SpeakerExport-smooth-test.txt | ./bin/rttmSmooth.pl 1 > Computers.mp4-SpeakerExport-smooth-test-modif.txt 
     smoothDirectory:function(rttmPath){
+        console.log("smooth RTTM for dir :"+rttmPath);
         String.prototype.replaceAll = function(search, replacement) {
             var target = this;
             return target.split(search).join(replacement);
         };
 
         fs.readdir(rttmPath, function(err, items) {
-            if(items && items[i] && ! items[i].startsWith('.')){
+            if (err){
+                console.log(err);
+            }
+            if (items){
                 for (var i=0; i<items.length; i++) {
-                    //str.replace(/abc/g, '');
-                    shspawn('cat ' + rttmPath+items[i].replaceAll(' ','\\ ') + ' | ./bin/rttmSmooth.pl '+ 1 + ' > ' +rttmPath+ items[i].replaceAll(' ','\\ ')+'-smoothed.txt');
+                    if(items[i] && ! items[i].startsWith('.')){
+                        var cmd = '';
+                        for (var i=0; i<items.length; i++) {
+                            cmd = 'cat ' + rttmPath+items[i].replaceAll(' ','\\ ') + ' | ./bin/rttmSmooth.pl '+ 1 + ' > ' +rttmPath+ items[i].replaceAll(' ','\\ ')+'-smoothed.txt' ;
+                            console.log(cmd);
+                            shspawn(cmd);
+                        }
+                    }
                 }
+            }
+            else {
+                console.log('is '+rttmPath + 'correct?');
             }
         });
     },
@@ -55,9 +68,10 @@ module.exports = {
          		cmdArgs= '';
          	
             for (var i=0; i<items.length; i++) {
-            		if(items && items[i] && items[i] != ".DS_Store"){
+            		if(items && items[i] && ! items[i].startsWith('.') ){
                         //console.log(items[i]);
         	    		cmdArgs = ['-R', generatedRttmListDir + '/' + items[i]+'list.txt', '-s', generatedRttmPath + '/' + items[i] ];
+                        //console.log(cmdArgs);
         	    		run(cmd,cmdArgs,items[i], (contextualData,result)=>{
         	    			var resultPosition = result.indexOf("OVERALL SPEAKER DIARIZATION ERROR");
                             if ( result && contextualData ){
