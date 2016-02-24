@@ -1,0 +1,6 @@
+node_modules
+*-smoothed.txt	
+*.log
+src/asclite/core/config.log
+src/asclite/test/config.log
+src/utf_filt/config.log

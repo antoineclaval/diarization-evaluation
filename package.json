@@ -1,0 +1,33 @@
+{
+  "name": "rttm-evaluation",
+  "version": "0.0.1",
+  "description": "run sctk tools to evaluate machine generated RTTM agaist humans ",
+  "main": "all-test.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "dependencies": {
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antoineclaval/diarization-evaluation.git"
+  },
+  "keywords": [
+    "diarization",
+    "rttm",
+    "diarisation",
+    "md-eval",
+    "sctk"
+  ],
+  "author": "antoine claval",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/antoineclaval/diarization-evaluation/issues"
+  },
+  "homepage": "https://github.com/antoineclaval/diarization-evaluation#readme"
+}
